@@ -2,13 +2,14 @@
 name = "app"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["pbelcak https://github.com/pbelcak/UltraFastBERT"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-
+torch = "^2.2.2"
+numpy = "^1.26.4"
 
 [build-system]
 requires = ["poetry-core"]
