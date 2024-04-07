@@ -15,9 +15,9 @@
       let
         # see https://github.com/nix-community/poetry2nix/tree/master#api for more functions and examples.
         pkgs = nixpkgs.legacyPackages.${system};
-        inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryApplication;
-      in
-      {
+        inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; })
+          mkPoetryApplication;
+      in {
         packages = {
           myapp = mkPoetryApplication { projectDir = self; };
           default = self.packages.${system}.myapp;
@@ -25,7 +25,12 @@
 
         devShells.default = pkgs.mkShell {
           inputsFrom = [ self.packages.${system}.myapp ];
-          packages = with pkgs; [ poetry ];
+          packages = with pkgs; [
+            poetry
+            python311Packages.python-lsp-server
+            python312Packages.python-lsp-ruff
+            python311Packages.python-lsp-ruff
+          ];
         };
       });
 }
